@@ -16,6 +16,7 @@ Files: README
  lib/PerlX/Switch.pm
  t/01basic.t
  t/02pod-eg.t
+ t/03callerargs.t
 Copyright: This software is copyright (c) 2013 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 

@@ -15,6 +15,9 @@ DESCRIPTION
     less confusing than `use feature 'switch'`, and more powerful than
     Switch::Plain (though Switch::Plain is significantly faster).
 
+    PerlX::Switch uses the Perl keyword API, which was introduced in Perl
+    5.14, so this module does not work on older releases of Perl.
+
     The basic grammar of the switch statement is as follows:
 
        switch ( TEST ) {
@@ -100,6 +103,12 @@ DESCRIPTION
 
   Fallthrough
     There's no fallthrough.
+
+  `match($x, $y)`
+    This module can also re-export the `match` function from match::simple,
+    but not by default.
+
+       use PerlX::Switch qw( match switch );
 
 CAVEATS
     Internally a lot of parts of code are passed around as coderefs, so

@@ -5,10 +5,11 @@ use warnings;
 package PerlX::Switch;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.001';
+our $VERSION   = '0.002';
 our @EXPORT    = qw( switch );
 our @EXPORT_OK = qw( match );
 
+use Devel::Caller qw( caller_args );
 use Devel::LexAlias qw( lexalias );
 use Exporter qw( import );
 use match::simple qw( match );
@@ -18,12 +19,13 @@ use Parse::Keyword { switch => \&_parse_switch };
 sub switch
 {
 	my ($pkg, $expr, $comparator, $cases, $default) = @_;
+	my @args = @_ = caller_args(1);
 	
 	my $pad = peek_my(1);
 	my $var = defined($expr)
 		? do {
 			lexalias($expr, $_, $pad->{$_}) for keys %$pad;
-			$expr->();
+			$expr->(@args);
 		}
 		: $_;
 	Internals::SvREADONLY($var, 1);
@@ -36,7 +38,7 @@ sub switch
 			no strict 'refs';
 			local *{"$pkg\::a"} = \ $_[0];
 			local *{"$pkg\::b"} = \ $_[1];
-			$comparator->(@_);
+			$comparator->(@args);
 		};
 	}
 	
@@ -48,7 +50,7 @@ sub switch
 		my $matched = 0;
 		if ($type eq 'block')
 		{
-			$matched = !!$condition->();
+			$matched = !!$condition->(@args);
 		}
 		else
 		{
@@ -60,13 +62,13 @@ sub switch
 		}
 		
 		lexalias($block, $_, $pad->{$_}) for keys %$pad;
-		return $block->() if $matched;
+		goto $block if $matched;
 	}
 	
 	if ($default)
 	{
 		lexalias($default, $_, $pad->{$_}) for keys %$pad;
-		return $default->();
+		goto $default;
 	}
 	return;
 }
@@ -137,8 +139,10 @@ sub _parse_switch
 	die "syntax error; expected end of switch block" unless lex_peek eq '}';
 	lex_read(1);
 	
+	my $pkg = compiling_package;
+	
 	return (
-		sub { (scalar(compiling_package), $expr, $comparator, \@cases, $default) },
+		sub { ($pkg, $expr, $comparator, \@cases, $default) },
 		$is_statement,
 	);
 }
@@ -233,6 +237,9 @@ This module provides Perl with a switch statement. It's more reliable than
 the L<Switch> module (which is broken on recent versions of Perl anyway),
 less confusing than C<< use feature 'switch' >>, and more powerful than
 L<Switch::Plain> (though Switch::Plain is significantly faster).
+
+PerlX::Switch uses the Perl keyword API, which was introduced in Perl 5.14,
+so this module does not work on older releases of Perl.
 
 The basic grammar of the switch statement is as follows:
 
@@ -333,6 +340,13 @@ There's no fallthrough.
 =item switch
 
 =end trustme
+
+=head2 C<< match($x, $y) >>
+
+This module can also re-export the C<match> function from L<match::simple>,
+but not by default.
+
+   use PerlX::Switch qw( match switch );
 
 =head1 CAVEATS
 

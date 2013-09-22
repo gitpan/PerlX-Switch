@@ -21,6 +21,7 @@ my $meta = {
                         develop   => { recommends => { "Dist::Inkt" => 0.001 } },
                         runtime   => {
                                        requires => {
+                                         "Devel::Caller"   => 0,
                                          "Devel::LexAlias" => 0.05,
                                          "Exporter"        => 5.57,
                                          "match::simple"   => 0.004,
@@ -32,7 +33,7 @@ my $meta = {
                         test      => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "PerlX::Switch" => { file => "lib/PerlX/Switch.pm", version => 0.001 },
+                        "PerlX::Switch" => { file => "lib/PerlX/Switch.pm", version => 0.002 },
                       },
   "release_status" => "stable",
   "resources"      => {
@@ -44,7 +45,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-perlx-switch" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/PerlX-Switch/project",
                       },
-  "version"        => 0.001,
+  "version"        => 0.002,
 };
 
 my %dynamic_config;

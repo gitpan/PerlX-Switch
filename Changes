@@ -6,4 +6,15 @@ Home page:    <https://metacpan.org/release/PerlX-Switch>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=PerlX-Switch>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.002	2013-09-22
+
+ [ Documentation ]
+ - Document Perl 5.14 requirement.
+ - Document that the module re-exports `match`.
+
+ [ Other ]
+ - Some improvements accessing @_ within switch blocks, but still... caveat
+   invocator!
+ - switch now internally uses tail calls (`goto`) when possible.
+
 0.001	2013-09-21	Initial release
