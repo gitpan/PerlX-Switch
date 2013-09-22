@@ -6,6 +6,16 @@ Home page:    <https://metacpan.org/release/PerlX-Switch>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=PerlX-Switch>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.003	2013-09-22
+
+ [ Documentation ]
+ - Document `$a` and `$b` better.
+ - Document the status of this distribution.
+
+ [ Other ]
+ - Prevent warnings from `$a` and `$b` using a little trick in `import`.
+ - The `if` option is now called `mode`.
+
 0.002	2013-09-22
 
  [ Documentation ]

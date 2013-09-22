@@ -9,6 +9,13 @@ SYNOPSIS
           default:    $day_type = "weekday";
        }
 
+STATUS
+    Experimental.
+
+    No backwards compatibility between releases is guaranteed. Both the
+    surface syntax and the internals of the module are liable to change at my
+    whim.
+
 DESCRIPTION
     This module provides Perl with a switch statement. It's more reliable than
     the Switch module (which is broken on recent versions of Perl anyway),
@@ -83,14 +90,15 @@ DESCRIPTION
     match::simple is just the default. You can provide your own expression for
     matching:
 
-       switch ($number) if ($a > $b) {
+       switch ($number) mode ($a > $b) {
           case 1000:   say "greater than 1000";
           case 100:    say "greater than 100";
           case 10:     say "greater than 10";
           case 1:      say "greater than 1";
        }
 
-    $a is the TERM and $b is the EXPR.
+    $a is the TERM and $b is the EXPR. These are the same special package
+    variables used by `sort` and by `reduce` from [mod://List::Util].
 
   Switch expressions
     Although `switch` acts as a full statement usually, it can be used as part

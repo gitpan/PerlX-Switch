@@ -33,7 +33,7 @@ my $meta = {
                         test      => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "PerlX::Switch" => { file => "lib/PerlX/Switch.pm", version => 0.002 },
+                        "PerlX::Switch" => { file => "lib/PerlX/Switch.pm", version => 0.003 },
                       },
   "release_status" => "stable",
   "resources"      => {
@@ -45,7 +45,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-perlx-switch" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/PerlX-Switch/project",
                       },
-  "version"        => 0.002,
+  "version"        => 0.003,
 };
 
 my %dynamic_config;

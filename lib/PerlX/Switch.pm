@@ -5,16 +5,23 @@ use warnings;
 package PerlX::Switch;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.002';
+our $VERSION   = '0.003';
 our @EXPORT    = qw( switch );
 our @EXPORT_OK = qw( match );
 
 use Devel::Caller qw( caller_args );
 use Devel::LexAlias qw( lexalias );
-use Exporter qw( import );
+use Exporter qw( );
 use match::simple qw( match );
 use PadWalker qw( peek_my );
 use Parse::Keyword { switch => \&_parse_switch };
+
+sub import
+{
+	my $pkg = caller;
+	eval qq[ package $pkg; our \$a; our \$b; ];
+	goto \&Exporter::import;
+}
 
 sub switch
 {
@@ -91,9 +98,9 @@ sub _parse_switch
 		lex_read_space;
 	}
 	
-	if (lex_peek(2) eq 'if')
+	if (lex_peek(4) eq 'mode')
 	{
-		lex_read(2);
+		lex_read(4);
 		lex_read_space;
 		die "syntax error; expected open parenthesis" unless lex_peek eq '(';
 		lex_read(1);
@@ -231,6 +238,14 @@ PerlX::Switch - yet another switch statement for Perl
       default:    $day_type = "weekday";
    }
 
+=head1 STATUS
+
+Experimental.
+
+No backwards compatibility between releases is guaranteed. Both the
+surface syntax and the internals of the module are liable to change
+at my whim.
+
 =head1 DESCRIPTION
 
 This module provides Perl with a switch statement. It's more reliable than
@@ -312,14 +327,15 @@ Above I said that matching is performed by L<match::simple>. That was a lie.
 L<match::simple> is just the default. You can provide your own expression
 for matching:
 
-   switch ($number) if ($a > $b) {
+   switch ($number) mode ($a > $b) {
       case 1000:   say "greater than 1000";
       case 100:    say "greater than 100";
       case 10:     say "greater than 10";
       case 1:      say "greater than 1";
    }
 
-C<< $a >> is the TERM and C<< $b >> is the EXPR.
+C<< $a >> is the TERM and C<< $b >> is the EXPR. These are the same special
+package variables used by C<sort> and by C<reduce> from [mod://List::Util].
 
 =head2 Switch expressions
 
