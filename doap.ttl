@@ -30,7 +30,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "PerlX-Switch";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-001>, <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-002>, <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-003>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-001>, <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-002>, <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-003>, <http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-004>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-perlx-switch>;
@@ -63,6 +63,9 @@
 		], [
 			a doap-changeset:Change;
 			rdfs:label "Some improvements accessing @_ within switch blocks, but still... caveat invocator!";
+		], [
+			a doap-changeset:Tests;
+			rdfs:label "Include some test cases for @_ within switch blocks.";
 		];
 	];
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -91,6 +94,23 @@
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Switch-0.003.tar.gz>;
 	doap:revision        "0.003"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/PerlX-Switch/v_0-004>
+	a                    doap:Version;
+	dc:identifier        "PerlX-Switch-0.004"^^xsd:string;
+	dc:issued            "2013-09-22"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Packaging;
+			rdfs:label "Use a newer version of Dist::Inkt.";
+		], [
+			a doap-changeset:Bugfix;
+			rdfs:label "Minor pod syntax fix.";
+		];
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/PerlX-Switch-0.004.tar.gz>;
+	doap:revision        "0.004"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/tobyink>
 	a                    foaf:Person;

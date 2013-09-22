@@ -5,7 +5,7 @@ use warnings;
 package PerlX::Switch;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003';
+our $VERSION   = '0.004';
 our @EXPORT    = qw( switch );
 our @EXPORT_OK = qw( match );
 
@@ -335,7 +335,7 @@ for matching:
    }
 
 C<< $a >> is the TERM and C<< $b >> is the EXPR. These are the same special
-package variables used by C<sort> and by C<reduce> from [mod://List::Util].
+package variables used by C<sort> and by C<reduce> from L<List::Util>.
 
 =head2 Switch expressions
 
